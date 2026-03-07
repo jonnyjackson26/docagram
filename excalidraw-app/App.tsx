@@ -54,7 +54,7 @@ import {
   restoreElements,
 } from "@excalidraw/excalidraw/data/restore";
 import { newElementWith } from "@excalidraw/element";
-import { isInitializedImageElement } from "@excalidraw/element";
+import { getSceneVersion, isInitializedImageElement } from "@excalidraw/element";
 import clsx from "clsx";
 import {
   parseLibraryTokensFromUrl,
@@ -208,6 +208,8 @@ const shareableLinkConfirmDialog = {
   actionLabel: t("overwriteConfirm.modal.shareableLink.button"),
   color: "danger",
 } as const;
+
+const AUTO_SHARE_LINK_DEBOUNCE_MS = 1200;
 
 const initializeScene = async (opts: {
   collabAPI: CollabAPI | null;
@@ -407,6 +409,9 @@ const ExcalidrawWrapper = () => {
   });
 
   const [, forceRefresh] = useState(false);
+  const lastAutoSharedSceneVersionRef = useRef(0);
+  const autoShareRequestedSceneVersionRef = useRef(0);
+  const autoShareDebounceTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (isDevEnv()) {
@@ -632,6 +637,65 @@ const ExcalidrawWrapper = () => {
     };
   }, [excalidrawAPI]);
 
+  useEffect(() => {
+    return () => {
+      if (autoShareDebounceTimeoutRef.current !== null) {
+        window.clearTimeout(autoShareDebounceTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const autoShareReadonlyLink = useCallback(
+    async (sceneVersion: number) => {
+      if (!excalidrawAPI || (!isCollabDisabled && collabAPI?.isCollaborating())) {
+        return;
+      }
+
+      if (sceneVersion < autoShareRequestedSceneVersionRef.current) {
+        return;
+      }
+
+      const sceneElements = excalidrawAPI.getSceneElements();
+      if (sceneElements.some((element) => isInitializedImageElement(element))) {
+        return;
+      }
+
+      excalidrawAPI.setToast({
+        message: "Saving...",
+        duration: AUTO_SHARE_LINK_DEBOUNCE_MS,
+      });
+
+      const appState = excalidrawAPI.getAppState();
+      const { url, errorMessage } = await exportToReadonlyLink(
+        sceneElements,
+        {
+          ...appState,
+          viewBackgroundColor: appState.exportBackground
+            ? appState.viewBackgroundColor
+            : getDefaultAppState().viewBackgroundColor,
+        },
+        excalidrawAPI.getFiles(),
+      );
+
+      if (sceneVersion < autoShareRequestedSceneVersionRef.current) {
+        return;
+      }
+
+      if (errorMessage || !url) {
+        return;
+      }
+
+      window.history.replaceState({}, APP_NAME, url);
+      lastAutoSharedSceneVersionRef.current = sceneVersion;
+
+      excalidrawAPI.setToast({
+        message: t("toast.fileSaved"),
+        duration: 1000,
+      });
+    },
+    [collabAPI, excalidrawAPI, isCollabDisabled],
+  );
+
   const onChange = (
     elements: readonly OrderedExcalidrawElement[],
     appState: AppState,
@@ -682,6 +746,35 @@ const ExcalidrawWrapper = () => {
         window.devicePixelRatio,
       );
     }
+
+    if (
+      (!isCollabDisabled && collabAPI?.isCollaborating()) ||
+      appState.isLoading ||
+      elements.some((element) => isInitializedImageElement(element))
+    ) {
+      return;
+    }
+
+    const sceneVersion = getSceneVersion(elements);
+    if (sceneVersion <= autoShareRequestedSceneVersionRef.current) {
+      return;
+    }
+
+    autoShareRequestedSceneVersionRef.current = sceneVersion;
+
+    if (autoShareDebounceTimeoutRef.current !== null) {
+      window.clearTimeout(autoShareDebounceTimeoutRef.current);
+    }
+
+    autoShareDebounceTimeoutRef.current = window.setTimeout(() => {
+      autoShareDebounceTimeoutRef.current = null;
+
+      if (sceneVersion <= lastAutoSharedSceneVersionRef.current) {
+        return;
+      }
+
+      void autoShareReadonlyLink(sceneVersion);
+    }, AUTO_SHARE_LINK_DEBOUNCE_MS);
   };
 
   const [latestShareableLink, setLatestShareableLink] = useState<string | null>(
