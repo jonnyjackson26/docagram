@@ -87,7 +87,6 @@ import {
   appJotaiStore,
 } from "./app-jotai";
 import {
-  FIREBASE_STORAGE_PREFIXES,
   isExcalidrawPlusSignedUser,
   STORAGE_KEYS,
   SYNC_BROWSER_TABS_TIMEOUT,
@@ -107,9 +106,10 @@ import {
 import { TopErrorBoundary } from "./components/TopErrorBoundary";
 
 import {
-  exportToBackend,
+  exportToReadonlyLink,
   getCollaborationLinkData,
-  importFromBackend,
+  getReadonlyLinkData,
+  importFromReadonlyLinkData,
   isCollaborationLink,
 } from "./data";
 
@@ -119,7 +119,6 @@ import {
   importUsernameFromLocalStorage,
 } from "./data/localStorage";
 
-import { loadFilesFromFirebase } from "./data/firebase";
 import {
   LibraryIndexedDBAdapter,
   LibraryLocalStorageMigrationAdapter,
@@ -213,17 +212,8 @@ const shareableLinkConfirmDialog = {
 const initializeScene = async (opts: {
   collabAPI: CollabAPI | null;
   excalidrawAPI: ExcalidrawImperativeAPI;
-}): Promise<
-  { scene: ExcalidrawInitialDataState | null } & (
-    | { isExternalScene: true; id: string; key: string }
-    | { isExternalScene: false; id?: null; key?: null }
-  )
-> => {
-  const searchParams = new URLSearchParams(window.location.search);
-  const id = searchParams.get("id");
-  const jsonBackendMatch = window.location.hash.match(
-    /^#json=([a-zA-Z0-9_-]+),([a-zA-Z0-9_-]+)$/,
-  );
+}): Promise<{ scene: ExcalidrawInitialDataState | null; isExternalScene: boolean }> => {
+  const readonlyLinkData = getReadonlyLinkData(window.location.href);
   const externalUrlMatch = window.location.hash.match(/^#url=(.*)$/);
 
   const localDataState = importFromLocalStorage();
@@ -244,7 +234,7 @@ const initializeScene = async (opts: {
   };
 
   let roomLinkData = getCollaborationLinkData(window.location.href);
-  const isExternalScene = !!(id || jsonBackendMatch || roomLinkData);
+  const isExternalScene = !!(readonlyLinkData || roomLinkData);
   if (isExternalScene) {
     if (
       // don't prompt if scene is empty
@@ -254,11 +244,20 @@ const initializeScene = async (opts: {
       // otherwise, prompt whether user wants to override current scene
       (await openConfirmModal(shareableLinkConfirmDialog))
     ) {
-      if (jsonBackendMatch) {
-        const imported = await importFromBackend(
-          jsonBackendMatch[1],
-          jsonBackendMatch[2],
-        );
+      if (readonlyLinkData) {
+        let imported;
+        try {
+          imported = await importFromReadonlyLinkData(readonlyLinkData);
+        } catch (error: any) {
+          return {
+            scene: {
+              appState: {
+                errorMessage: t("alerts.invalidSceneUrl"),
+              },
+            },
+            isExternalScene: true,
+          };
+        }
 
         scene = {
           elements: bumpElementVersions(
@@ -308,7 +307,7 @@ const initializeScene = async (opts: {
         !scene.elements.length ||
         (await openConfirmModal(shareableLinkConfirmDialog))
       ) {
-        return { scene: data, isExternalScene };
+        return { scene: data, isExternalScene: true };
       }
     } catch (error: any) {
       return {
@@ -317,7 +316,7 @@ const initializeScene = async (opts: {
             errorMessage: t("alerts.invalidSceneUrl"),
           },
         },
-        isExternalScene,
+        isExternalScene: true,
       };
     }
   }
@@ -352,18 +351,9 @@ const initializeScene = async (opts: {
         ),
       },
       isExternalScene: true,
-      id: roomLinkData.roomId,
-      key: roomLinkData.roomKey,
     };
   } else if (scene) {
-    return isExternalScene && jsonBackendMatch
-      ? {
-          scene,
-          isExternalScene,
-          id: jsonBackendMatch[1],
-          key: jsonBackendMatch[2],
-        }
-      : { scene, isExternalScene: false };
+    return { scene, isExternalScene: false };
   }
   return { scene: null, isExternalScene: false };
 };
@@ -470,20 +460,7 @@ const ExcalidrawWrapper = () => {
             return acc;
           }, [] as FileId[]) || [];
 
-        if (data.isExternalScene) {
-          loadFilesFromFirebase(
-            `${FIREBASE_STORAGE_PREFIXES.shareLinkFiles}/${data.id}`,
-            data.key,
-            fileIds,
-          ).then(({ loadedFiles, erroredFiles }) => {
-            excalidrawAPI.addFiles(loadedFiles);
-            updateStaleImageStatuses({
-              excalidrawAPI,
-              erroredFiles,
-              elements: excalidrawAPI.getSceneElementsIncludingDeleted(),
-            });
-          });
-        } else if (isInitialLoad) {
+        if (isInitialLoad) {
           if (fileIds.length) {
             LocalData.fileStorage
               .getFiles(fileIds)
@@ -720,7 +697,7 @@ const ExcalidrawWrapper = () => {
       throw new Error(t("alerts.cannotExportEmptyCanvas"));
     }
     try {
-      const { url, errorMessage } = await exportToBackend(
+      const { url, errorMessage } = await exportToReadonlyLink(
         exportedElements,
         {
           ...appState,
