@@ -4,13 +4,6 @@ import { JSDOM } from "jsdom";
 import type { ExcalidrawElement } from "@excalidraw/element/types";
 import type { AppState } from "@excalidraw/excalidraw/types";
 
-import { getDefaultAppState } from "../packages/excalidraw/appState";
-import {
-  restoreAppState,
-  restoreElements,
-} from "../packages/excalidraw/data/restore";
-import { exportToSvg } from "../packages/excalidraw/scene/export";
-
 type ImportedDataState = {
   elements: readonly ExcalidrawElement[] | null;
   appState: Partial<AppState> | null;
@@ -151,6 +144,16 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
   try {
     installDomGlobals();
+
+    const [appStateModule, restoreModule, exportModule] = await Promise.all([
+      import("../packages/excalidraw/appState"),
+      import("../packages/excalidraw/data/restore"),
+      import("../packages/excalidraw/scene/export"),
+    ]);
+
+    const { getDefaultAppState } = appStateModule;
+    const { restoreAppState, restoreElements } = restoreModule;
+    const { exportToSvg } = exportModule;
 
     const imported = importFromReadonlyLinkData(payload);
     const restoredElements = restoreElements(imported.elements, null, {
