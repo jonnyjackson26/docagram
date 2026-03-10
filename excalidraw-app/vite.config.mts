@@ -148,6 +148,8 @@ export default defineConfig(({ mode }) => {
         },
 
         workbox: {
+          // Keep API requests on the network instead of serving app-shell HTML.
+          navigateFallbackDenylist: [/^\/api\//],
           // don't precache fonts, locales and separate chunks
           globIgnores: [
             "fonts.css",
