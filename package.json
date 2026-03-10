@@ -7,6 +7,10 @@
     "packages/*",
     "examples/*"
   ],
+  "dependencies": {
+    "jsdom": "22.1.0",
+    "pako": "2.0.3"
+  },
   "devDependencies": {
     "@babel/preset-env": "7.26.9",
     "@excalidraw/eslint-config": "1.0.3",
@@ -28,7 +32,6 @@
     "eslint-plugin-prettier": "3.3.1",
     "http-server": "14.1.1",
     "husky": "7.0.4",
-    "jsdom": "22.1.0",
     "lint-staged": "12.3.7",
     "pepjs": "0.5.3",
     "prettier": "2.6.2",
