@@ -15,7 +15,6 @@
 build
 api/serve.mjs
 api/render.js
-api/render.mjs
 dist
 firebase
 logs
