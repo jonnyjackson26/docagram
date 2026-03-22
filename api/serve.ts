@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { parse as parseUrl } from "node:url";
 
-import handler from "./render";
+import handler from "./render-handler";
 
 const PORT = Number(process.env.RENDER_PORT || 3002);
 

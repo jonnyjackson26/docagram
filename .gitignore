@@ -14,6 +14,7 @@
 *.tgz
 build
 api/serve.mjs
+api/render.mjs
 dist
 firebase
 logs
