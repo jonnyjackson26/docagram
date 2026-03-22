@@ -13,6 +13,7 @@
 *.log
 *.tgz
 build
+api/serve.mjs
 dist
 firebase
 logs

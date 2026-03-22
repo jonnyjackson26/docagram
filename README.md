@@ -23,8 +23,19 @@ Notes:
 - Current implementation supports `format=svg`.
 - Payloads above the endpoint limit are rejected.
 
-Install
+## Local Development
+
+```bash
+yarn                       # install dependencies
+
+# Terminal 1: build & start the render server
+yarn build:render          # bundles api/render.ts + excalidraw into api/serve.mjs
+yarn start:render          # starts render server on port 3002
+
+# Terminal 2: start the app
+yarn start                 # starts Vite dev server on port 3001
 ```
-yarn    (install )
-yarn start    (run app)
-```
+
+Vite proxies `/api/render` requests to the render server automatically.
+
+The render server port is configurable via `RENDER_PORT` env var (default: 3002). If you change it, update the proxy target in `excalidraw-app/vite.config.mts` to match.

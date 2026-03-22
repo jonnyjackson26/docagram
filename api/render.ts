@@ -83,29 +83,25 @@ const installDomGlobals = () => {
     pretendToBeVisual: true,
   });
 
-  const globalScope = globalThis as typeof globalThis & {
-    window: Window & typeof globalThis;
-    document: Document;
-    navigator: Navigator;
-    HTMLElement: typeof HTMLElement;
-    SVGElement: typeof SVGElement;
-    Element: typeof Element;
-    Node: typeof Node;
-    atob: (data: string) => string;
-    btoa: (data: string) => string;
+  const define = (key: string, value: unknown) => {
+    Object.defineProperty(globalThis, key, {
+      value,
+      writable: true,
+      configurable: true,
+    });
   };
 
-  globalScope.window = dom.window as unknown as Window & typeof globalThis;
-  globalScope.document = dom.window.document;
-  globalScope.navigator = dom.window.navigator;
-  globalScope.HTMLElement = dom.window.HTMLElement;
-  globalScope.SVGElement = dom.window.SVGElement;
-  globalScope.Element = dom.window.Element;
-  globalScope.Node = dom.window.Node;
-  globalScope.atob = (data: string) =>
-    Buffer.from(data, "base64").toString("binary");
-  globalScope.btoa = (data: string) =>
-    Buffer.from(data, "binary").toString("base64");
+  define("window", dom.window);
+  define("document", dom.window.document);
+  define("navigator", dom.window.navigator);
+  define("HTMLElement", dom.window.HTMLElement);
+  define("SVGElement", dom.window.SVGElement);
+  define("Element", dom.window.Element);
+  define("Node", dom.window.Node);
+  define("atob", (data: string) =>
+    Buffer.from(data, "base64").toString("binary"));
+  define("btoa", (data: string) =>
+    Buffer.from(data, "binary").toString("base64"));
 };
 
 const sendError = (res: ApiResponse, code: number, message: string) => {
