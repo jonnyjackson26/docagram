@@ -64,7 +64,7 @@
     "build": "yarn --cwd ./excalidraw-app build",
     "build:preview": "yarn --cwd ./excalidraw-app build:preview",
     "build:render": "esbuild api/serve.ts --bundle --platform=node --format=esm --outfile=api/serve.mjs --external:jsdom --external:pako --loader:.woff2=dataurl --define:import.meta.env={} --alias:@excalidraw/common=./packages/common/src --alias:@excalidraw/element=./packages/element/src --alias:@excalidraw/excalidraw=./packages/excalidraw --alias:@excalidraw/math=./packages/math/src --alias:@excalidraw/utils=./packages/utils/src",
-    "build:render:vercel": "esbuild api/render-handler.ts --bundle --platform=node --format=esm --outfile=api/render.mjs --external:jsdom --external:pako --loader:.woff2=dataurl --define:import.meta.env={} --alias:@excalidraw/common=./packages/common/src --alias:@excalidraw/element=./packages/element/src --alias:@excalidraw/excalidraw=./packages/excalidraw --alias:@excalidraw/math=./packages/math/src --alias:@excalidraw/utils=./packages/utils/src",
+    "build:render:vercel": "esbuild api/render-handler.ts --bundle --platform=node --format=cjs --outfile=api/render.js --external:jsdom --external:pako --loader:.woff2=empty --define:import.meta.env={} --alias:@excalidraw/common=./packages/common/src --alias:@excalidraw/element=./packages/element/src --alias:@excalidraw/excalidraw=./packages/excalidraw --alias:@excalidraw/math=./packages/math/src --alias:@excalidraw/utils=./packages/utils/src",
     "start:render": "node api/serve.mjs",
     "start": "yarn --cwd ./excalidraw-app start",
     "start:production": "yarn --cwd ./excalidraw-app start:production",
