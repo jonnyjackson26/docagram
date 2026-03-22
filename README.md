@@ -39,3 +39,4 @@ yarn start                 # starts Vite dev server on port 3001
 Vite proxies `/api/render` requests to the render server automatically.
 
 The render server port is configurable via `RENDER_PORT` env var (default: 3002). If you change it, update the proxy target in `excalidraw-app/vite.config.mts` to match.
+
