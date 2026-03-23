@@ -401,10 +401,7 @@
     "disk_button": "Gorde fitxategian",
     "link_title": "Partekatzeko esteka",
     "link_details": "Esportatu irakurtzeko soilik moduko esteka.",
-    "link_button": "Esportatu esteka",
-    "excalidrawplus_description": "Gorde eszena zure Excalidraw+ laneko areara.",
-    "excalidrawplus_button": "Esportatu",
-    "excalidrawplus_exportError": "Une honetan ezin izan da esportatu Excalidraw+era..."
+    "link_button": "Esportatu esteka"
   },
   "helpDialog": {
     "blog": "Irakurri gure bloga",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Horren ordez Excalidraw+-era joan nahi al zenuen?",
       "menuHint": "Esportatu, hobespenak, hizkuntzak..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Gorde diskoan",
         "button": "Gorde diskoan",
         "description": "Esportatu eszenaren datuak geroago inportatu ahal izango duzun fitxategi batan."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Esportatu Excalidraw+ra",
-        "description": "Gorde eszena zure Excalidraw+ laneko areara."
       }
     },
     "modal": {

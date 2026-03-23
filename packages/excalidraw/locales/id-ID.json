@@ -401,10 +401,7 @@
     "disk_button": "Simpan ke file",
     "link_title": "Tautan",
     "link_details": "Ekspor sebagai tautan yang hanya dibaca.",
-    "link_button": "Ekspor ke tautan",
-    "excalidrawplus_description": "Simpan pemandangan ke ruang kerja Excalidraw+ Anda.",
-    "excalidrawplus_button": "Ekspor",
-    "excalidrawplus_exportError": "Tidak dapat ekspor ke Excalidraw+ saat ini..."
+    "link_button": "Ekspor ke tautan"
   },
   "helpDialog": {
     "blog": "Baca blog kami",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Apa Anda ingin berpindah ke Excalidraw+?",
       "menuHint": "Ekspor, preferensi, bahasa, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Simpan ke disk",
         "button": "Simpan ke disk",
         "description": "Ekspor data pemandangan ke file yang dapat Anda dapat impor nanti."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Ekspor ke Excalidraw+",
-        "description": "Simpan pemandangan ke ruang kerja Excalidraw+ Anda."
       }
     },
     "modal": {

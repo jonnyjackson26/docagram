@@ -401,10 +401,7 @@
     "disk_button": "Guardar num ficheiro",
     "link_title": "Hiperligação partilhável",
     "link_details": "Exportar como uma hiperligação de apenas leitura.",
-    "link_button": "Exportar para hiperligação",
-    "excalidrawplus_description": "Guardar a cena no seu espaço de trabalho do Excalidraw+.",
-    "excalidrawplus_button": "Exportar",
-    "excalidrawplus_exportError": "Não foi possível exportar para o Excalidraw+ neste momento..."
+    "link_button": "Exportar para hiperligação"
   },
   "helpDialog": {
     "blog": "Leia o nosso blogue",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Queria antes ir para o Excalidraw+?",
       "menuHint": "Exportar, preferências, idiomas..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Guardar no disco",
         "button": "Guardar no disco",
         "description": "Exportar os dados da cena para um ficheiro do qual poderá importar mais tarde."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Exportar para Excalidraw+",
-        "description": "Guardar a cena no seu espaço de trabalho do Excalidraw+."
       }
     },
     "modal": {

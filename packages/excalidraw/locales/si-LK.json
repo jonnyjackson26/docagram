@@ -401,10 +401,7 @@
     "disk_button": "තැටි බොත්තම",
     "link_title": "සබැඳි මාතෘකාව",
     "link_details": "සබැඳි විස්තර",
-    "link_button": "සබැඳි බොත්තම",
-    "excalidrawplus_description": "ExcalidrawPlus විස්තර",
-    "excalidrawplus_button": "ExcalidrawPlus බොත්තම",
-    "excalidrawplus_exportError": "ExcalidrawPlus නිර්යාත දෝෂය"
+    "link_button": "සබැඳි බොත්තම"
   },
   "helpDialog": {
     "blog": "බ්ලොග්",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "අයදුම් මධ්‍ය ශීර්ෂය Plus",
       "menuHint": "මෙනු ඉඟිය"
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "තැටියට සුරැකීම ආවරණය",
         "button": "තැටියට සුරැකීම බොත්තම",
         "description": "තැටියට සුරැකීම විස්තර"
-      },
-      "excalidrawPlus": {
-        "title": "ExcalidrawPlus ආවරණය",
-        "button": "ExcalidrawPlus බොත්තම",
-        "description": "ExcalidrawPlus විස්තර"
       }
     },
     "modal": {

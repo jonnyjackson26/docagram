@@ -401,10 +401,7 @@
     "disk_button": "Salvare în fișier",
     "link_title": "URL partajabil",
     "link_details": "Exportă ca URL doar în citire.",
-    "link_button": "Exportare în URL",
-    "excalidrawplus_description": "Salvează scena în spațiul de lucru Excalidraw+.",
-    "excalidrawplus_button": "Exportare",
-    "excalidrawplus_exportError": "Excalidraw+ nu a putut fi exportat în acest moment..."
+    "link_button": "Exportare în URL"
   },
   "helpDialog": {
     "blog": "Citește blogul nostru",
@@ -560,7 +557,6 @@
       "center_heading": "Desenele tale sunt salvate în spațiul de stocare al navigatorului tău.",
       "center_heading_line2": "Spațiul de stocare al navigatorului poate fi șters în mod neașteptat.",
       "center_heading_line3": "Salvează-ți periodic munca într-un fișier pentru a evita pierderea acesteia.",
-      "center_heading_plus": "Ai vrut să mergi în schimb la Excalidraw+?",
       "menuHint": "Exportare, preferințe, limbi, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Salvare pe disc",
         "button": "Salvare pe disc",
         "description": "Exportă datele scenei pe un fișier din care poți importa mai târziu."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Exportare în Excalidraw+",
-        "description": "Salvează scena în spațiul de lucru Excalidraw+."
       }
     },
     "modal": {

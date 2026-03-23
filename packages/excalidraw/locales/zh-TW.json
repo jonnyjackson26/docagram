@@ -401,10 +401,7 @@
     "disk_button": "儲存至檔案",
     "link_title": "可共享連結",
     "link_details": "匯出為唯讀連結",
-    "link_button": "匯出為連結",
-    "excalidrawplus_description": "將此場景儲存至你的 Excalidraw+ 工作區",
-    "excalidrawplus_button": "輸出",
-    "excalidrawplus_exportError": "目前無法輸出至 Excalidraw+"
+    "link_button": "匯出為連結"
   },
   "helpDialog": {
     "blog": "閱讀部落格",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "您是否是要前往 Excalidraw+ ？",
       "menuHint": "輸出、偏好設定、語言..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "儲存至硬碟",
         "button": "儲存至硬碟",
         "description": "將場景匯出為可供匯入的檔案"
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "匯出至 Excalidraw+",
-        "description": "將此場景儲存至您的 Excalidraw+ 工作區"
       }
     },
     "modal": {

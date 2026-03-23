@@ -401,10 +401,7 @@
     "disk_button": "Sekles deg ufaylu",
     "link_title": "Aseɣwen n beṭṭu",
     "link_details": "Sifeḍ am useɣwen n tɣuri kan.",
-    "link_button": "Sifeḍ deg useɣwen",
-    "excalidrawplus_description": "Sekles asayes-inek•inem di tallunt n umahil Excalidraw+.",
-    "excalidrawplus_button": "Sifeḍ",
-    "excalidrawplus_exportError": "Ulamek asifeḍ ɣer Excalidraw+ akka tura..."
+    "link_button": "Sifeḍ deg useɣwen"
   },
   "helpDialog": {
     "blog": "Ɣeṛ ablug-nneɣ",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Tebɣiḍ ad tedduḍ ɣer Excalidraw+ deg umḍiq?",
       "menuHint": "Asifeḍ, ismenyifen, tutlayin, ..."
     },
     "defaults": {
@@ -588,11 +584,6 @@
       "saveToDisk": {
         "title": "Sekles ar uḍebsi",
         "button": "Sekles ar uḍebsi",
-        "description": ""
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "",
         "description": ""
       }
     },

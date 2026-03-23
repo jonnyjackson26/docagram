@@ -401,10 +401,7 @@
     "disk_button": "Spara till fil",
     "link_title": "Delbar länk",
     "link_details": "Exportera som en skrivskyddad länk.",
-    "link_button": "Exportera till länk",
-    "excalidrawplus_description": "Spara skissen till din Excalidraw+ arbetsyta.",
-    "excalidrawplus_button": "Exportera",
-    "excalidrawplus_exportError": "Det gick inte att exportera till Excalidraw+ just nu..."
+    "link_button": "Exportera till länk"
   },
   "helpDialog": {
     "blog": "Läs vår blogg",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Ville du gå till Excalidraw+ istället?",
       "menuHint": "Exportera, inställningar, språk, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Spara till disk",
         "button": "Spara till disk",
         "description": "Exportera scendata till en fil från vilken du kan importera senare."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Exportera till Excalidraw+",
-        "description": "Spara skissen till din Excalidraw+ arbetsyta."
       }
     },
     "modal": {

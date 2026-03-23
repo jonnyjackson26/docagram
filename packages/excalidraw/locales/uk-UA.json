@@ -401,10 +401,7 @@
     "disk_button": "Зберегти до файлу",
     "link_title": "Доступ за посиланням",
     "link_details": "Експортувати як посилання тільки для читання.",
-    "link_button": "Експортувати у посилання",
-    "excalidrawplus_description": "Збережіть сцену у вашому обліковому записі Excalidraw+.",
-    "excalidrawplus_button": "Експортувати",
-    "excalidrawplus_exportError": "Не вдалося експортувати у Excalidraw+..."
+    "link_button": "Експортувати у посилання"
   },
   "helpDialog": {
     "blog": "Наш блог",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Чи бажаєте перейти до Excalidraw+?",
       "menuHint": "Експорт, налаштування, мови, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Зберегти на диск",
         "button": "Зберегти на диск",
         "description": "Експорт даних сцени в файл, з якого можна імпортувати пізніше."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Експортувати до Excalidraw+",
-        "description": "Зберегти сцену до робочого простору Excalidraw+."
       }
     },
     "modal": {

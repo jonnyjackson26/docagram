@@ -401,10 +401,7 @@
     "disk_button": "ファイルへ保存",
     "link_title": "共有可能なリンク",
     "link_details": "読み取り専用リンクとしてエクスポート",
-    "link_button": "リンクとしてエクスポート",
-    "excalidrawplus_description": "Excalidraw+ ワークスペースにシーンを保存します。",
-    "excalidrawplus_button": "エクスポート",
-    "excalidrawplus_exportError": "Excalidraw+ にエクスポートできませんでした..."
+    "link_button": "リンクとしてエクスポート"
   },
   "helpDialog": {
     "blog": "公式ブログを読む",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "代わりにExcalidraw+を開きますか？",
       "menuHint": "エクスポート、設定、言語..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "ディスクに保存",
         "button": "ディスクに保存",
         "description": "シーンデータを後でインポートできるファイルにエクスポートします。"
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Excalidraw+にエクスポート",
-        "description": "Excalidraw+ ワークスペースにシーンを保存します。"
       }
     },
     "modal": {

@@ -401,10 +401,7 @@
     "disk_button": "שמירה לקובץ",
     "link_title": "קבל קישור לשיתוף",
     "link_details": "ייצוא כקישור לקריאה בלבד.",
-    "link_button": "ייצוא לקישור",
-    "excalidrawplus_description": "שמור את הקנבאס לסביבת העבודה שלך ב- +Excalidraw.",
-    "excalidrawplus_button": "ייצוא",
-    "excalidrawplus_exportError": "לא הצלחתי לייצא ל- +Excalidraw כרגע..."
+    "link_button": "ייצוא לקישור"
   },
   "helpDialog": {
     "blog": "קרא את הבלוג שלנו",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "אתה רוצה ללכת אל Excalidraw+ במקום?",
       "menuHint": "ייצוא, העדפות, שפות, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "שמירה לכונן",
         "button": "שמירה לכונן",
         "description": "ייצוא נתוני הסצנה לקובץ אותו אפשר לייבא בהמשך."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+‎",
-        "button": "ייצוא ל־Excalidraw+‎",
-        "description": "שמירת הסצנה לסביבת העבודה שלך ב־+Excalidraw."
       }
     },
     "modal": {

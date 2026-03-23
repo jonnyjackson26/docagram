@@ -401,10 +401,7 @@
     "disk_button": "Shrani v datoteko",
     "link_title": "Povezava za deljenje",
     "link_details": "Izvoz kot povezava samo za branje.",
-    "link_button": "Izvoz kot povezava",
-    "excalidrawplus_description": "Shrani sceno v svoj delovni prostor Excalidraw+.",
-    "excalidrawplus_button": "Izvoz",
-    "excalidrawplus_exportError": "Trenutno ni bilo mogoče izvoziti v Excalidraw+..."
+    "link_button": "Izvoz kot povezava"
   },
   "helpDialog": {
     "blog": "Preberite naš blog",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Ste namesto tega želeli odpreti Excalidraw+?",
       "menuHint": "Izvoz, nastavitve, jeziki, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Shrani na disk",
         "button": "Shrani na disk",
         "description": "Izvozite podatke scene v datoteko, iz katere jo lahko pozneje uvozite."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Izvozi v Excalidraw+",
-        "description": "Shrani sceno v svoj delovni prostor Excalidraw+."
       }
     },
     "modal": {

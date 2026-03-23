@@ -401,10 +401,7 @@
     "disk_button": "حفظ إلى ملف",
     "link_title": "رابط قابل للمشاركة",
     "link_details": "تصدير الملف للمشاهدة فقط.",
-    "link_button": "تصدير كرابط",
-    "excalidrawplus_description": "حفظ المشهد إلى مساحة العمل +Excalidraw الخاصة بك.",
-    "excalidrawplus_button": "تصدير",
-    "excalidrawplus_exportError": "تعذر التص несп في الوقت الحالي إلى +Excalidraw..."
+    "link_button": "تصدير كرابط"
   },
   "helpDialog": {
     "blog": "اقرأ مدونتنا",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "هل تريد الانتقال إلى Excalidraw+ بدلاً من ذلك؟",
       "menuHint": "التصدير، التفضيلات، اللغات..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "حفظ الملف على الجهاز",
         "button": "حفظ الملف على الجهاز",
         "description": "تصدير بيانات المشهد إلى ملف يمكنك الاستيراد منه لاحقًا."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "تصدير إلى Excalidraw+",
-        "description": "حفظ المشهد إلى مساحة العمل +Excalidraw الخاصة بك."
       }
     },
     "modal": {

@@ -401,10 +401,7 @@
     "disk_button": "Файлға сақтау",
     "link_title": "Ортақ сілтеме",
     "link_details": "Тек оқуға арналған сілтеме ретінде экспорттау.",
-    "link_button": "Сілтемеге экспорттау",
-    "excalidrawplus_description": "Сахнаны өзіңіздің Excalidraw+ жұмыс кеңістігінде сақтаңыз.",
-    "excalidrawplus_button": "Экспорт",
-    "excalidrawplus_exportError": "Қазіргі уақытта Excalidraw+ үшін экспорттау мүмкін емес..."
+    "link_button": "Сілтемеге экспорттау"
   },
   "helpDialog": {
     "blog": "Біздің блогты оқу",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "",
       "menuHint": ""
     },
     "defaults": {
@@ -586,11 +582,6 @@
         "description": ""
       },
       "saveToDisk": {
-        "title": "",
-        "button": "",
-        "description": ""
-      },
-      "excalidrawPlus": {
         "title": "",
         "button": "",
         "description": ""

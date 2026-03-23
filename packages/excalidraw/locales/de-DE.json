@@ -401,10 +401,7 @@
     "disk_button": "Als Datei speichern",
     "link_title": "Teilbarer Link",
     "link_details": "Als schreibgeschützten Link exportieren.",
-    "link_button": "Als Link exportieren",
-    "excalidrawplus_description": "Speichere die Szene in deinem Excalidraw+ Arbeitsbereich.",
-    "excalidrawplus_button": "Exportieren",
-    "excalidrawplus_exportError": "Konnte nicht nach Excalidraw+ exportieren..."
+    "link_button": "Als Link exportieren"
   },
   "helpDialog": {
     "blog": "Lies unseren Blog",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Möchtest du stattdessen zu Excalidraw+ gehen?",
       "menuHint": "Exportieren, Einstellungen, Sprachen, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Auf Festplatte speichern",
         "button": "Auf Festplatte speichern",
         "description": "Exportiere die Zeichnungsdaten in eine Datei, von der Du später importieren kannst."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Export nach Excalidraw+",
-        "description": "Speichere die Szene in deinem Excalidraw+-Arbeitsbereich."
       }
     },
     "modal": {

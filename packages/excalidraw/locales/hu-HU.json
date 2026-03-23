@@ -401,10 +401,7 @@
     "disk_button": "Mentés fájlba",
     "link_title": "Megosztható hivatkozás",
     "link_details": "Exportálás csak olvasható hivatkozásként.",
-    "link_button": "Exportálás hivatkozásba",
-    "excalidrawplus_description": "Mentse el a jelenetet az Excalidraw+ munkaterületére.",
-    "excalidrawplus_button": "Exportálás",
-    "excalidrawplus_exportError": "Jelenleg nem lehet exportálni az Excalidraw+-ba..."
+    "link_button": "Exportálás hivatkozásba"
   },
   "helpDialog": {
     "blog": "Olvasd a blogunkat",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "",
       "menuHint": ""
     },
     "defaults": {
@@ -586,11 +582,6 @@
         "description": ""
       },
       "saveToDisk": {
-        "title": "",
-        "button": "",
-        "description": ""
-      },
-      "excalidrawPlus": {
         "title": "",
         "button": "",
         "description": ""

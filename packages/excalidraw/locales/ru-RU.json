@@ -401,10 +401,7 @@
     "disk_button": "Сохранить в файл",
     "link_title": "Поделитесь ссылкой",
     "link_details": "Экспорт ссылки только для чтения.",
-    "link_button": "Экспорт в ссылку",
-    "excalidrawplus_description": "Сохраните сцену в ваше рабочее пространство Excalidraw+.",
-    "excalidrawplus_button": "Экспорт",
-    "excalidrawplus_exportError": "Не удалось экспортировать в Excalidraw+ на данный момент..."
+    "link_button": "Экспорт в ссылку"
   },
   "helpDialog": {
     "blog": "Прочитайте наш блог",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Хотите перейти на Excalidraw+?",
       "menuHint": "Экспорт, настройки, языки, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Сохранить на диск",
         "button": "Сохранить на диск",
         "description": "Экспортировать данные сцены в файл, из которого можно импортировать позже."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Экспорт в Excalidraw+",
-        "description": "Сохраните сцену в ваше рабочее пространство Excalidraw+."
       }
     },
     "modal": {

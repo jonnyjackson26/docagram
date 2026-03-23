@@ -401,10 +401,7 @@
     "disk_button": "Uložiť do súboru",
     "link_title": "Odkaz na zdieľanie",
     "link_details": "Exportovať ako odkaz iba na čítanie.",
-    "link_button": "Exportovať ako odkaz",
-    "excalidrawplus_description": "Uložiť scénu do vášho Excalidraw+ pracovného priestoru.",
-    "excalidrawplus_button": "Exportovať",
-    "excalidrawplus_exportError": "Nepodarilo sa vykonať export do Excalidraw+..."
+    "link_button": "Exportovať ako odkaz"
   },
   "helpDialog": {
     "blog": "Prečítajte si náš blog",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "Chceli ste namiesto toho prejsť do Excalidraw+?",
       "menuHint": "Exportovanie, nastavenia, jazyky, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Uložiť na disk",
         "button": "Uložiť na disk",
         "description": "Exportovať údaje scény do súboru, z ktorého môžu byť neskôr importované."
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Exportovať ako Excalidraw+",
-        "description": "Uložiť scénu do vášho Excalidraw+ pracovného priestoru."
       }
     },
     "modal": {

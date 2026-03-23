@@ -401,10 +401,7 @@
     "disk_button": "Запази като файл",
     "link_title": "Връзка за споделяне",
     "link_details": "",
-    "link_button": "",
-    "excalidrawplus_description": "",
-    "excalidrawplus_button": "Експорт",
-    "excalidrawplus_exportError": ""
+    "link_button": ""
   },
   "helpDialog": {
     "blog": "Прочетете нашия блог",
@@ -560,7 +557,6 @@
       "center_heading": "",
       "center_heading_line2": "",
       "center_heading_line3": "",
-      "center_heading_plus": "",
       "menuHint": "Експорт, предпочитания, езици, ..."
     },
     "defaults": {
@@ -589,11 +585,6 @@
         "title": "Запази към диск",
         "button": "Запази към диск",
         "description": ""
-      },
-      "excalidrawPlus": {
-        "title": "Excalidraw+",
-        "button": "Експортирай към Excalidraw+",
-        "description": "Запази сцената към Excalidraw+ работното място."
       }
     },
     "modal": {
