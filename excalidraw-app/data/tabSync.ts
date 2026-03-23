@@ -3,7 +3,6 @@ import { STORAGE_KEYS } from "../app_constants";
 // in-memory state (this tab's current state) versions. Currently just
 // timestamps of the last time the state was saved to browser storage.
 const LOCAL_STATE_VERSIONS = {
-  [STORAGE_KEYS.VERSION_DATA_STATE]: -1,
   [STORAGE_KEYS.VERSION_FILES]: -1,
 };
 

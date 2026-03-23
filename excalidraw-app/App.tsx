@@ -10,10 +10,7 @@ import {
   DEFAULT_CATEGORIES,
 } from "@excalidraw/excalidraw/components/CommandPalette/CommandPalette";
 import { ErrorDialog } from "@excalidraw/excalidraw/components/ErrorDialog";
-import { OverwriteConfirmDialog } from "@excalidraw/excalidraw/components/OverwriteConfirm/OverwriteConfirm";
-import { openConfirmModal } from "@excalidraw/excalidraw/components/OverwriteConfirm/OverwriteConfirmState";
 import { ShareableLinkDialog } from "@excalidraw/excalidraw/components/ShareableLinkDialog";
-import Trans from "@excalidraw/excalidraw/components/Trans";
 import {
   APP_NAME,
   EVENT,
@@ -72,7 +69,6 @@ import type { ResolvablePromise } from "@excalidraw/common/utils";
 import CustomStats from "./CustomStats";
 import {
   Provider,
-  useAtomValue,
   appJotaiStore,
 } from "./app-jotai";
 import {
@@ -91,13 +87,11 @@ import {
 } from "./data";
 
 import { updateStaleImageStatuses } from "./data/FileManager";
-import { importFromLocalStorage } from "./data/localStorage";
 
 import {
   LibraryIndexedDBAdapter,
   LibraryLocalStorageMigrationAdapter,
   LocalData,
-  localStorageQuotaExceededAtom,
 } from "./data/LocalData";
 import { isBrowserStorageStateNewer } from "./data/tabSync";
 import { useHandleAppTheme } from "./useHandleAppTheme";
@@ -164,28 +158,14 @@ if (window.self !== window.top) {
   }
 }
 
-const shareableLinkConfirmDialog = {
-  title: t("overwriteConfirm.modal.shareableLink.title"),
-  description: (
-    <Trans
-      i18nKey="overwriteConfirm.modal.shareableLink.description"
-      bold={(text) => <strong>{text}</strong>}
-      br={() => <br />}
-    />
-  ),
-  actionLabel: t("overwriteConfirm.modal.shareableLink.button"),
-  color: "danger",
-} as const;
-
 const AUTO_SHARE_LINK_DEBOUNCE_MS = 1200;
 
-const initializeScene = async (opts: {
-  excalidrawAPI: ExcalidrawImperativeAPI;
-}): Promise<{ scene: ExcalidrawInitialDataState | null; isExternalScene: boolean }> => {
+const initializeScene = async (): Promise<{
+  scene: ExcalidrawInitialDataState | null;
+  isExternalScene: boolean;
+}> => {
   const readonlyLinkData = getReadonlyLinkData(window.location.href);
   const externalUrlMatch = window.location.hash.match(/^#url=(.*)$/);
-
-  const localDataState = importFromLocalStorage();
 
   let scene: Omit<
     RestoredDataState,
@@ -195,70 +175,43 @@ const initializeScene = async (opts: {
   > & {
     scrollToContent?: boolean;
   } = {
-    elements: restoreElements(localDataState?.elements, null, {
+    elements: restoreElements([], null, {
       repairBindings: true,
       deleteInvisibleElements: true,
     }),
-    appState: restoreAppState(localDataState?.appState, null),
+    appState: restoreAppState(null, null),
   };
 
   const isExternalScene = !!readonlyLinkData;
   if (isExternalScene) {
-    if (
-      // don't prompt if scene is empty
-      !scene.elements.length ||
-      // otherwise, prompt whether user wants to override current scene
-      (await openConfirmModal(shareableLinkConfirmDialog))
-    ) {
-      if (readonlyLinkData) {
-        let imported;
-        try {
-          imported = await importFromReadonlyLinkData(readonlyLinkData);
-        } catch (error: any) {
-          return {
-            scene: {
-              appState: {
-                errorMessage: t("alerts.invalidSceneUrl"),
-              },
+    if (readonlyLinkData) {
+      let imported;
+      try {
+        imported = await importFromReadonlyLinkData(readonlyLinkData);
+      } catch (error: any) {
+        return {
+          scene: {
+            appState: {
+              errorMessage: t("alerts.invalidSceneUrl"),
             },
-            isExternalScene: true,
-          };
-        }
-
-        scene = {
-          elements: bumpElementVersions(
-            restoreElements(imported.elements, null, {
-              repairBindings: true,
-              deleteInvisibleElements: true,
-            }),
-            localDataState?.elements,
-          ),
-          appState: restoreAppState(
-            imported.appState,
-            // local appState when importing from backend to ensure we restore
-            // localStorage user settings which we do not persist on server.
-            localDataState?.appState,
-          ),
+          },
+          isExternalScene: true,
         };
       }
-      scene.scrollToContent = true;
-      window.history.replaceState({}, APP_NAME, window.location.origin);
-    } else {
-      // https://github.com/excalidraw/excalidraw/issues/1919
-      if (document.hidden) {
-        return new Promise((resolve, reject) => {
-          window.addEventListener(
-            "focus",
-            () => initializeScene(opts).then(resolve).catch(reject),
-            {
-              once: true,
-            },
-          );
-        });
-      }
 
-      window.history.replaceState({}, APP_NAME, window.location.origin);
+      scene = {
+        elements: bumpElementVersions(
+          restoreElements(imported.elements, null, {
+            repairBindings: true,
+            deleteInvisibleElements: true,
+          }),
+          [],
+        ),
+        appState: restoreAppState(imported.appState, null),
+      };
     }
+    scene.scrollToContent = true;
+    window.history.replaceState({}, APP_NAME, window.location.origin);
   } else if (externalUrlMatch) {
     window.history.replaceState({}, APP_NAME, window.location.origin);
 
@@ -266,12 +219,7 @@ const initializeScene = async (opts: {
     try {
       const request = await fetch(window.decodeURIComponent(url));
       const data = await loadFromBlob(await request.blob(), null, null);
-      if (
-        !scene.elements.length ||
-        (await openConfirmModal(shareableLinkConfirmDialog))
-      ) {
-        return { scene: data, isExternalScene: true };
-      }
+      return { scene: data, isExternalScene: true };
     } catch (error: any) {
       return {
         scene: {
@@ -389,7 +337,7 @@ const ExcalidrawWrapper = () => {
       }
     };
 
-    initializeScene({ excalidrawAPI }).then(async (data) => {
+    initializeScene().then(async (data) => {
       loadImages(data, /* isInitialLoad */ true);
       initialStatePromiseRef.current.promise.resolve(data.scene);
     });
@@ -400,7 +348,7 @@ const ExcalidrawWrapper = () => {
       if (!libraryUrlTokens) {
         excalidrawAPI.updateScene({ appState: { isLoading: true } });
 
-        initializeScene({ excalidrawAPI }).then((data) => {
+        initializeScene().then((data) => {
           loadImages(data);
           if (data.scene) {
             excalidrawAPI.updateScene({
@@ -420,22 +368,14 @@ const ExcalidrawWrapper = () => {
         return;
       }
       if (!document.hidden) {
-        // don't sync if local state is newer or identical to browser state
-        if (isBrowserStorageStateNewer(STORAGE_KEYS.VERSION_DATA_STATE)) {
-          const localDataState = importFromLocalStorage();
-          setLangCode(getPreferredLanguage());
-          excalidrawAPI.updateScene({
-            ...localDataState,
-            captureUpdate: CaptureUpdateAction.NEVER,
-          });
-          LibraryIndexedDBAdapter.load().then((data) => {
-            if (data) {
-              excalidrawAPI.updateLibrary({
-                libraryItems: data.libraryItems,
-              });
-            }
-          });
-        }
+        setLangCode(getPreferredLanguage());
+        LibraryIndexedDBAdapter.load().then((data) => {
+          if (data) {
+            excalidrawAPI.updateLibrary({
+              libraryItems: data.libraryItems,
+            });
+          }
+        });
 
         if (isBrowserStorageStateNewer(STORAGE_KEYS.VERSION_FILES)) {
           const elements = excalidrawAPI.getSceneElementsIncludingDeleted();
@@ -720,8 +660,6 @@ const ExcalidrawWrapper = () => {
     );
   };
 
-  const localStorageQuotaExceeded = useAtomValue(localStorageQuotaExceededAtom);
-
   // browsers generally prevent infinite self-embedding, there are
   // cases where it still happens, and while we disallow self-embedding
   // by not whitelisting our own origin, this serves as an additional guard
@@ -775,19 +713,10 @@ const ExcalidrawWrapper = () => {
           refresh={() => forceRefresh((prev) => !prev)}
         />
         <AppWelcomeScreen />
-        <OverwriteConfirmDialog>
-          <OverwriteConfirmDialog.Actions.ExportToImage />
-          <OverwriteConfirmDialog.Actions.SaveToDisk />
-        </OverwriteConfirmDialog>
         <AppFooter onChange={() => excalidrawAPI?.refresh()} />
         {excalidrawAPI && <AIComponents excalidrawAPI={excalidrawAPI} />}
 
         <TTDDialogTrigger />
-        {localStorageQuotaExceeded && (
-          <div className="alert alert--danger">
-            {t("alerts.localStorageQuotaExceeded")}
-          </div>
-        )}
         {latestShareableLink && (
           <ShareableLinkDialog
             link={latestShareableLink}

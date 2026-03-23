@@ -258,7 +258,7 @@
     "couldNotCopyToClipboard": "Couldn't copy to clipboard.",
     "decryptFailed": "Couldn't decrypt data.",
     "uploadedSecurly": "The upload has been secured with end-to-end encryption, which means that Excalidraw server and third parties can't read the content.",
-    "loadSceneOverridePrompt": "Loading external drawing will replace your existing content. Do you wish to continue?",
+    "loadSceneOverridePrompt": "Load drawing from link?",
     "collabStopOverridePrompt": "Stopping the session will overwrite your previous, locally stored drawing. Are you sure?\n\n(If you want to keep your local drawing, simply close the browser tab instead.)",
     "errorAddingToLibrary": "Couldn't add item to the library",
     "errorRemovingFromLibrary": "Couldn't remove item from the library",
@@ -563,9 +563,9 @@
   },
   "welcomeScreen": {
     "app": {
-      "center_heading": "Your drawings are saved in your browser's storage.",
-      "center_heading_line2": "Browser storage can be cleared unexpectedly.",
-      "center_heading_line3": "Save your work to a file regularly to avoid losing it.",
+      "center_heading": "Your drawing is encoded in the URL.",
+      "center_heading_line2": "Bookmark or copy the URL to keep your work.",
+      "center_heading_line3": "No drawing content is stored in local storage.",
       "menuHint": "Export, preferences, languages, ..."
     },
     "defaults": {
@@ -604,8 +604,8 @@
       },
       "shareableLink": {
         "title": "Load from link",
-        "button": "Replace my content",
-        "description": "Loading external drawing will <bold>replace your existing content</bold>.<br></br>You can back up your drawing first by using one of the options below."
+        "button": "Load drawing",
+        "description": "Load drawing from URL."
       }
     }
   },
