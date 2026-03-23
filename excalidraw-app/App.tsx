@@ -9,6 +9,7 @@ import {
   CommandPalette,
   DEFAULT_CATEGORIES,
 } from "@excalidraw/excalidraw/components/CommandPalette/CommandPalette";
+import DropdownMenu from "@excalidraw/excalidraw/components/dropdownMenu/DropdownMenu";
 import { ErrorDialog } from "@excalidraw/excalidraw/components/ErrorDialog";
 import { ShareableLinkDialog } from "@excalidraw/excalidraw/components/ShareableLinkDialog";
 import {
@@ -603,6 +604,7 @@ const ExcalidrawWrapper = () => {
   const [latestShareableLink, setLatestShareableLink] = useState<string | null>(
     null,
   );
+  const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
 
   const onExportToBackend = async (
     exportedElements: readonly NonDeletedExcalidrawElement[],
@@ -643,6 +645,111 @@ const ExcalidrawWrapper = () => {
       }
     }
   };
+
+  const getExportUrls = useCallback(async () => {
+    if (!excalidrawAPI) {
+      throw new Error("Excalidraw is not ready yet.");
+    }
+
+    const sceneElements = excalidrawAPI.getSceneElements();
+    const sceneAppState = excalidrawAPI.getAppState();
+    const { url, errorMessage } = await exportToReadonlyLink(
+      sceneElements,
+      {
+        ...sceneAppState,
+        viewBackgroundColor: sceneAppState.exportBackground
+          ? sceneAppState.viewBackgroundColor
+          : getDefaultAppState().viewBackgroundColor,
+      },
+      excalidrawAPI.getFiles(),
+    );
+
+    if (errorMessage || !url) {
+      throw new Error(errorMessage || t("alerts.couldNotCreateShareableLink"));
+    }
+
+    const payload = getReadonlyLinkData(url);
+    if (!payload) {
+      throw new Error(t("alerts.invalidSceneUrl"));
+    }
+
+    const renderOrigin =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+        ? "https://docagram.vercel.app"
+        : window.location.origin;
+    const renderUrl = new URL("/api/render", renderOrigin);
+    renderUrl.searchParams.set("data", payload);
+    renderUrl.searchParams.set("format", "svg");
+
+    return {
+      dataPayloadUrl: url,
+      renderUrl: renderUrl.toString(),
+    };
+  }, [excalidrawAPI]);
+
+  const renderTopRightUI = useCallback(() => {
+    return (
+      <DropdownMenu open={isExportMenuOpen}>
+        <DropdownMenu.Trigger
+          className="sidebar-trigger docagram-export-trigger"
+          onToggle={() => setIsExportMenuOpen((open) => !open)}
+          data-testid="top-right-export-trigger"
+        >
+          <span className="sidebar-trigger__label">Export</span>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content
+          className="main-menu"
+          align="start"
+          onClickOutside={() => setIsExportMenuOpen(false)}
+          onSelect={() => setIsExportMenuOpen(false)}
+        >
+          <DropdownMenu.Item
+            onSelect={async () => {
+              try {
+                const { dataPayloadUrl } = await getExportUrls();
+                await navigator.clipboard.writeText(dataPayloadUrl);
+                excalidrawAPI?.setToast({
+                  message: "Copied data payload URL",
+                });
+              } catch (error: any) {
+                setErrorMessage(error.message);
+              }
+            }}
+          >
+            Copy data payload URL
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={async () => {
+              try {
+                const { renderUrl } = await getExportUrls();
+                await navigator.clipboard.writeText(renderUrl);
+                excalidrawAPI?.setToast({
+                  message: "Copied render URL for docs",
+                });
+              } catch (error: any) {
+                setErrorMessage(error.message);
+              }
+            }}
+          >
+            Copy render URL for docs
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={async () => {
+              try {
+                const { renderUrl } = await getExportUrls();
+                window.open(renderUrl, "_blank", "noopener,noreferrer");
+              } catch (error: any) {
+                setErrorMessage(error.message);
+              }
+            }}
+          >
+            Open render URL in new tab
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu>
+    );
+  }, [excalidrawAPI, getExportUrls, isExportMenuOpen]);
 
   const renderCustomStats = (
     elements: readonly NonDeletedExcalidrawElement[],
@@ -696,7 +803,7 @@ const ExcalidrawWrapper = () => {
         handleKeyboardGlobally={true}
         autoFocus={true}
         theme={editorTheme}
-        renderTopRightUI={() => null}
+        renderTopRightUI={renderTopRightUI}
         onLinkOpen={(element, event) => {
           if (element.link && isElementLink(element.link)) {
             event.preventDefault();

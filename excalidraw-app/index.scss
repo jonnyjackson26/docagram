@@ -26,6 +26,27 @@
     }
   }
 
+  .docagram-export-trigger {
+    &.dropdown-menu-button {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-surface-lowest);
+    }
+
+    &.dropdown-menu-button:hover {
+      background-color: var(--color-primary-darker);
+      border-color: var(--color-primary-darker);
+      color: var(--color-surface-lowest);
+    }
+
+    &.dropdown-menu-button:active {
+      background-color: var(--color-primary-darker);
+      border-color: var(--color-primary-darker);
+      color: var(--color-surface-lowest);
+      box-shadow: 0 0 0 1px var(--color-primary-darkest);
+    }
+  }
+
   .alert {
     pointer-events: none;
     position: absolute;
