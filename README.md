@@ -57,3 +57,8 @@ Deployed to Vercel. The build step bundles `server/render-handler.ts` into `api/
 - `server/render-handler.ts` — SVG render handler (uses JSDOM + Excalidraw's `exportToSvg`)
 - `server/serve.ts` — standalone HTTP server for local dev
 - `api/render.js` — pre-bundled serverless function (build artifact, committed for Vercel)
+
+
+
+NOTES:
+I'm now thinking why didnt i just add a server route to exclaidraw in a PR

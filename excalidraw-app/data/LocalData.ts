@@ -5,8 +5,8 @@
  * Notes:
  *
  * - DataState refers to full state of the app: appState, elements, images,
- *   though some state is saved separately (collab username, library) for one
- *   reason or another. We also save different data to different storage
+ *   though some state is saved separately (library) for one reason or another.
+ *   We also save different data to different storage
  *   (localStorage, indexedDB).
  */
 
@@ -111,7 +111,7 @@ const isQuotaExceededError = (error: any) => {
   return error instanceof DOMException && error.name === "QuotaExceededError";
 };
 
-type SavingLockTypes = "collaboration";
+type SavingLockTypes = "save";
 
 export class LocalData {
   private static _save = debounce(
