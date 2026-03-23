@@ -20,7 +20,7 @@ Use it in markdown to embed a live diagram image:
 
 - `data` is the payload from the URL hash (`#data=...`), without the `#data=` prefix.
 - `format=svg` is the only supported format currently.
-- Large payloads (>20,000 chars) are rejected.
+- Large payloads (>20,000 chars) are rejected
 
 
 # Example:
