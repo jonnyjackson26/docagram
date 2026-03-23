@@ -10,7 +10,7 @@ import { t } from "../i18n";
 import { getShortcutKey } from "../shortcut";
 
 import { Dialog } from "./Dialog";
-import { ExternalLinkIcon, GithubIcon, youtubeIcon } from "./icons";
+import { ExternalLinkIcon, GithubIcon } from "./icons";
 
 import "./HelpDialog.scss";
 
@@ -18,42 +18,50 @@ import type { JSX } from "react";
 
 const Header = () => (
   <div className="HelpDialog__header">
-    <a
-      className="HelpDialog__btn"
-      href="https://docs.excalidraw.com"
-      target="_blank"
-      rel="noopener"
-    >
-      <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
-      {t("helpDialog.documentation")}
-    </a>
-    <a
-      className="HelpDialog__btn"
-      href="https://plus.excalidraw.com/blog"
-      target="_blank"
-      rel="noopener"
-    >
-      <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
-      {t("helpDialog.blog")}
-    </a>
-    <a
-      className="HelpDialog__btn"
-      href="https://github.com/excalidraw/excalidraw/issues"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <div className="HelpDialog__link-icon">{GithubIcon}</div>
-      {t("helpDialog.github")}
-    </a>
-    <a
-      className="HelpDialog__btn"
-      href="https://youtube.com/@excalidraw"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <div className="HelpDialog__link-icon">{youtubeIcon}</div>
-      YouTube
-    </a>
+    <p className="HelpDialog__intro">
+      Docagram is built on the technology that powers{" "}
+      <a href="https://excalidraw.com" target="_blank" rel="noopener noreferrer">
+        Excalidraw
+      </a>
+      . It has unique features that make it perfect for adding diagrams in your
+      documentation files.{" "}
+      <a
+        href="https://jonny-jackson.com/posts/docagram/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Read More
+      </a>
+    </p>
+    <div className="HelpDialog__header-buttons">
+      <a
+        className="HelpDialog__btn"
+        href="https://docs.excalidraw.com"
+        target="_blank"
+        rel="noopener"
+      >
+        <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
+        {t("helpDialog.documentation")}
+      </a>
+      <a
+        className="HelpDialog__btn"
+        href="https://jonny-jackson.com/posts/docagram/"
+        target="_blank"
+        rel="noopener"
+      >
+        <div className="HelpDialog__link-icon">{ExternalLinkIcon}</div>
+        About
+      </a>
+      <a
+        className="HelpDialog__btn"
+        href="https://github.com/jonnyjackson26/docagram/issues"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div className="HelpDialog__link-icon">{GithubIcon}</div>
+        Issues
+      </a>
+    </div>
   </div>
 );
 

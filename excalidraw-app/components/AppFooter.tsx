@@ -2,7 +2,6 @@ import { Footer } from "@excalidraw/excalidraw/index";
 import React from "react";
 
 import { DebugFooter, isVisualDebuggerEnabled } from "./DebugCanvas";
-import { EncryptedIcon } from "./EncryptedIcon";
 
 export const AppFooter = React.memo(
   ({ onChange }: { onChange: () => void }) => {
@@ -16,7 +15,6 @@ export const AppFooter = React.memo(
           }}
         >
           {isVisualDebuggerEnabled() && <DebugFooter onChange={onChange} />}
-          <EncryptedIcon />
         </div>
       </Footer>
     );
